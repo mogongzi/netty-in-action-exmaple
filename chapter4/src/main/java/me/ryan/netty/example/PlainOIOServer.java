@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class PlainOIOServer {
 
@@ -19,7 +19,7 @@ public class PlainOIOServer {
                 OutputStream out;
                 try {
                     out = clientSocket.getOutputStream();
-                    out.write("Hi!\r\n".getBytes(Charset.forName("UTF-8")));
+                    out.write("Hi!\r\n".getBytes(StandardCharsets.UTF_8));
                     out.flush();
                     clientSocket.close();
                 } catch (IOException e) {
@@ -32,6 +32,15 @@ public class PlainOIOServer {
                     }
                 }
             }).start();
+        }
+    }
+
+    public static void main(String[] args) {
+        PlainOIOServer server = new PlainOIOServer();
+        try {
+            server.serve(8848);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

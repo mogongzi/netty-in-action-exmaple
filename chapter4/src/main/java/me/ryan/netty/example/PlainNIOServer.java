@@ -65,4 +65,13 @@ public class PlainNIOServer {
             }
         }
     }
+
+    public static void main(String[] args) {
+        PlainNIOServer server = new PlainNIOServer();
+        try {
+            server.serve(8848);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
