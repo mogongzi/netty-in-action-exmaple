@@ -44,15 +44,12 @@ public class BootstrapSharingEventLoopGroup {
                 });
 
         ChannelFuture future = bootstrap.bind(new InetSocketAddress(8080));
-        future.addListener(new ChannelFutureListener() {
-            @Override
-            public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                if (channelFuture.isSuccess()) {
-                    System.out.println("Server bound.");
-                } else {
-                    System.err.println("Bind attempt failed.");
-                    channelFuture.cause().printStackTrace();
-                }
+        future.addListener((ChannelFutureListener) channelFuture -> {
+            if (channelFuture.isSuccess()) {
+                System.out.println("Server bound.");
+            } else {
+                System.err.println("Bind attempt failed.");
+                channelFuture.cause().printStackTrace();
             }
         });
     }

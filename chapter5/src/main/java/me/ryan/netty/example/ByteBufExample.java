@@ -1,6 +1,9 @@
 package me.ryan.netty.example;
 
-import io.netty.buffer.*;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.CompositeByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -87,7 +90,7 @@ public class ByteBufExample {
 
     public static void byteBufProcess() {
         ByteBuf buf = BYTE_BUF_FROM_SOMEWHERE;
-        int index = buf.forEachByte(ByteBufProcessor.FIND_CR);
+        int index = buf.forEachByte(ByteProcessor.FIND_CR);
     }
 
     public static void byteBufSlice() {

@@ -17,13 +17,10 @@ public class ChannelFutures {
         ByteBuf someMessage = SOME_MSG_FROM_SOMEWHERE;
 
         ChannelFuture future = channel.write(someMessage);
-        future.addListener(new ChannelFutureListener() {
-            @Override
-            public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                if (!channelFuture.isSuccess()) {
-                    channelFuture.cause().printStackTrace();
-                    channelFuture.channel().close();
-                }
+        future.addListener((ChannelFutureListener) channelFuture -> {
+            if (!channelFuture.isSuccess()) {
+                channelFuture.cause().printStackTrace();
+                channelFuture.channel().close();
             }
         });
     }
