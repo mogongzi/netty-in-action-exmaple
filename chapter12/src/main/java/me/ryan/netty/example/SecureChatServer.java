@@ -8,9 +8,7 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
-import javax.net.ssl.SSLException;
 import java.net.InetSocketAddress;
-import java.security.cert.CertificateException;
 
 public class SecureChatServer extends ChatServer {
     private final SslContext sslContext;
@@ -32,7 +30,7 @@ public class SecureChatServer extends ChatServer {
 
         int port = Integer.parseInt(args[0]);
         SelfSignedCertificate cert = new SelfSignedCertificate();
-        SslContext sslContext = SslContextBuilder.forServer(cert.privateKey(), cert.certificate()).build();
+        SslContext sslContext = SslContextBuilder.forServer(cert.certificate(), cert.privateKey()).build();
 
         final SecureChatServer server = new SecureChatServer(sslContext);
         ChannelFuture future = server.start(new InetSocketAddress(port));

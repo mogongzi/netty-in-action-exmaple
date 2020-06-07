@@ -44,5 +44,29 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>SecureChatServer</id>
+            <properties>
+                <mainClass>me.ryan.netty.example.SecureChatServer</mainClass>
+                <port>8889</port>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>${mainClass}</argument>
+                                <argument>${port}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>
