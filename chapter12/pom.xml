@@ -11,5 +11,38 @@
 
     <artifactId>chapter12</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
+    <profiles>
+        <profile>
+            <id>ChatServer</id>
+            <properties>
+                <mainClass>me.ryan.netty.example.ChatServer</mainClass>
+                <port>8888</port>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>${mainClass}</argument>
+                                <argument>${port}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

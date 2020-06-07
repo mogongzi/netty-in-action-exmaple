@@ -20,7 +20,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
                 .getCodeSource().getLocation();
         try {
             String path = location.toURI() + "index.html";
-            path = !path.contains("file:") ? path  : path.substring(5);
+            path = !path.contains("file:") ? path : path.substring(5);
             INDEX = new File(path);
         } catch (URISyntaxException e) {
             throw new IllegalStateException("Unable to locate index.html ", e);
@@ -42,8 +42,8 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             }
 
             RandomAccessFile file = new RandomAccessFile(INDEX, "r");
-            HttpResponse response = new DefaultFullHttpResponse(request.protocolVersion(), HttpResponseStatus.OK);
-            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
+            HttpResponse response = new DefaultHttpResponse(request.protocolVersion(), HttpResponseStatus.OK);
+            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
 
             boolean keepAlive = HttpUtil.isKeepAlive(request);
             if (keepAlive) {
@@ -59,10 +59,10 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             }
 
             ChannelFuture future = ctx.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
-
             if (!keepAlive) {
                 future.addListener(ChannelFutureListener.CLOSE);
             }
+            file.close();
         }
     }
 
