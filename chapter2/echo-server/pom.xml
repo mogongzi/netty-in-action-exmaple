@@ -27,7 +27,7 @@
                    </execution>
                </executions>
                <configuration>
-                   <mainClass>me.netty.netty.example.EchoServer</mainClass>
+                   <mainClass>me.ryan.netty.example.EchoServer</mainClass>
                    <arguments>
                        <argument>${echo-server.port}</argument>
                    </arguments>

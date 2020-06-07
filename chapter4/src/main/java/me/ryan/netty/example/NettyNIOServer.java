@@ -39,4 +39,9 @@ public class NettyNIOServer {
             group.shutdownGracefully().sync();
         }
     }
+
+    public static void main(String[] args) throws InterruptedException {
+        NettyNIOServer server = new NettyNIOServer();
+        server.serve(9999);
+    }
 }
